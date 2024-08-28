@@ -1,17 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ItemObject : MonoBehaviour
 {
     public Item item;
+    public ItemList itemList;
 
-    private void OnTriggerEnter(Collider other)
+    private void Awake()
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (itemList.items.Contains(item))
         {
-            FindObjectOfType<Backpack>().AddToBackpack(item);
             Destroy(gameObject);
         }
+    }
+
+    public void AddToItemList()
+    {
+        itemList.items.Add(item);
     }
 }
