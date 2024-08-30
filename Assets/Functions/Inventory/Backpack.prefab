@@ -4316,7 +4316,7 @@ MonoBehaviour:
   - {fileID: 3170663344878951312}
   - {fileID: 5000823260301803664}
   - {fileID: 1035643662577393246}
-  allItems: []
+  inventory: {fileID: 11400000, guid: 9e760c28a5297f440b0640cc0c7dee86, type: 2}
 --- !u!1 &6437528628837024789
 GameObject:
   m_ObjectHideFlags: 0

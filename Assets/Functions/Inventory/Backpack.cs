@@ -15,13 +15,13 @@ public class Backpack : MonoBehaviour
     public KeyCode keyboardInput;
     [Header("背包存放格")]
     public List<GameObject> slotBtns;
-    [Header("存放的物品")]
-    public List<Item> allItems;
+    [Header("物品存储处")]
+    public Inventory inventory;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        UpdateBackpack();
     }
 
     // Update is called once per frame
@@ -32,21 +32,23 @@ public class Backpack : MonoBehaviour
             if (backpackPanel.activeSelf)
             {
                 backpackPanel.SetActive(false);
+                Time.timeScale = 1;
             } else
             {
                 backpackPanel.SetActive(true);
+                Time.timeScale = 0;
             }
         }
     }
 
     public void AddToBackpack(Item item)
     {
-        if (allItems.Contains(item))
+        if (inventory.items.Contains(item))
         {
             item.itemCount += 1;
         } else
         {
-            allItems.Add(item);
+            inventory.items.Add(item);
         }
         UpdateBackpack();
     }
@@ -60,18 +62,18 @@ public class Backpack : MonoBehaviour
         }
 
         // 再将全部物品的icon放进
-        for (int i = 0; i < allItems.Count; i++)
+        for (int i = 0; i < inventory.items.Count; i++)
         {
-            slotBtns[i].GetComponentsInChildren<Image>()[1].sprite = allItems[i].icon;
+            slotBtns[i].GetComponentsInChildren<Image>()[1].sprite = inventory.items[i].icon;
         }
     }
 
     public void ShowDetail(int index)
     {
-        if (allItems.Count > index)
+        if (inventory.items.Count > index)
         {
-            detailImage.sprite = allItems[index].icon;
-            detailText.text = allItems[index].itemDescription;
+            detailImage.sprite = inventory.items[index].icon;
+            detailText.text = inventory.items[index].itemDescription;
         }
     }
 }
